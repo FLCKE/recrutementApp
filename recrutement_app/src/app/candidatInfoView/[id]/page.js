@@ -1,5 +1,4 @@
-import React from 'react'
-
+import { Data } from "@/app/utilities/data";
 export default function Page({ params }) {
-  return <div>My Post: {params.id}</div>
+    return <div>My Post: {Data[params.id].personalInformation.desc}</div>
 }

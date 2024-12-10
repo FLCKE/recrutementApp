@@ -24,6 +24,7 @@ const generateFormValues = () => ({
     })),
     cvFile: faker.system.fileName('pdf'),
 });
-export function GeneratorOfFormValues(){
+function GeneratorOfFormValues(){
     return Array.from({ length: 10 }, generateFormValues)
 }
+export const Data = GeneratorOfFormValues();
