@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Layout } from "antd";
+import  Sider  from "antd/es/layout/Sider";
+import  Content  from "antd/es/layout/layout";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import "./globals.css";
+import AppHeader from "./components/AppHeader";
+import AppSider from "./components/AppSider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +34,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AntdRegistry>{children}</AntdRegistry>
+        <AntdRegistry>
+          <Layout>
+            <AppHeader/>
+            <Layout hasSider>
+              <Sider theme="light" className="fixed " >
+                <AppSider/>
+              </Sider>
+              <Layout >
+                <Content style={{margin:50}} >
+
+                  {children}
+                </Content>
+              </Layout>
+            </Layout>
+            </Layout>
+          </AntdRegistry>
       </body>
     </html>
   );

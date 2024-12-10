@@ -18,7 +18,7 @@ const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
-const App: React.FC = () => {
+function Page(){
 
     return (
         <>
@@ -259,4 +259,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default Page;
