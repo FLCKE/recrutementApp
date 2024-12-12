@@ -22,7 +22,10 @@ const generateFormValues = () => ({
         skillName: faker.hacker.ingverb(),
         skillLevel: faker.helpers.arrayElement(["Débutant", "Intermédiaire", "Pro"]),
     })),
-    cvFile: faker.system.fileName('pdf'),
+    cvFile: {
+        name: faker.system.fileName(),
+        url: "/doc/cv_doc.jpg",
+    },
 });
 function GeneratorOfFormValues(){
     return Array.from({ length: 10 }, generateFormValues)

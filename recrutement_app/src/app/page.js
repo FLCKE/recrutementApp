@@ -1,9 +1,6 @@
-import Image from "next/image";
 
+import { useTranslations } from 'next-intl';
 export default function Home() {
-  return (
-    <main className="">
-      hello world
-    </main>
-  );
+  const t = useTranslations('HomePage');
+  return <h1>{t('title')}</h1>;
 }
