@@ -1,13 +1,13 @@
-// src/slices/dataSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
-    personalInfo: {},
-    experience: [],
-    skills: [],
+  personalInfo: {},
+  experience: [],
+  skills: [],
     cvFile: null,
-};
-
+  };
+  
+//initialisation de la dataSlice et création des fonction de manipulation de la donnée a stocker
 const dataSlice = createSlice({
     name: 'data',
     initialState,

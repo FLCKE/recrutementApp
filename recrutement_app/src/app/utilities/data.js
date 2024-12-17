@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-
+//génerer une instance de data avec les valeurs provenant du faker.js
 const generateFormValues = () => ({
     personalInformation: {
         firstName: faker.person.firstName(),
@@ -27,7 +27,9 @@ const generateFormValues = () => ({
         url: "/doc/cv_doc.jpg",
     },
 });
+// function retournant un tableau de 10 instance d'information du candidats 
 function GeneratorOfFormValues(){
     return Array.from({ length: 10 }, generateFormValues)
 }
+//création et exportation du data
 export const Data = GeneratorOfFormValues();

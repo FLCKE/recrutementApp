@@ -2,7 +2,6 @@
 import React from "react";
 import { Header } from "antd/es/layout/layout";
 import { CodeSandboxSquareFilled, DownOutlined } from '@ant-design/icons'
-import { useLocale, useTranslations } from "next-intl";
 import { locale } from "@/i18n/request"
 import { Form, Select, Dropdown, Space, Button } from "antd"
 import { setUserLocale } from "../services/locale";
@@ -10,6 +9,7 @@ import { setUserLocale } from "../services/locale";
 
 
 function AppHeader() {
+    //initialisation des valeur du selecte pour changer de langue 
     const items = [
         {
             key: '1',
@@ -31,12 +31,14 @@ function AppHeader() {
   
     return (
         <Header className="flex item-center justify-between">
-            <div className="flex item-cneter gap-2 text-white">
-                <CodeSandboxSquareFilled className="text-white text-3xl" />
-                <div>
-                    Logo
+            <a href="/">
+                <div className="flex item-cneter gap-2 text-white">
+                    <CodeSandboxSquareFilled className="text-white text-3xl" />
+                    <div>
+                        Logo
+                    </div>
                 </div>
-            </div>
+            </a>
             <div>
                 
                 <Dropdown
@@ -53,12 +55,7 @@ function AppHeader() {
                         </Space>
                     </a>
                 </Dropdown>
-                {/* <Select
-                    defaultValue={useLocale()}
-                    onChange={handleChange}
-                    options={[{ value: 'en', label: (<button >English</button>) }, { value: 'fr', label: 'French' }]}
-                    placeholder="Langage"
-                /> */}
+                
             </div>
         </Header>
     )

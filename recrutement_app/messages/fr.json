@@ -1,7 +1,6 @@
 {
     "HomePage": {
-        "title": "Bienvenue!",
-        "personal information":"Information personnelle"
+        "title": "Bienvenue!"
     },
     "Page": {
         "titlePageList": "Liste des candidats ",

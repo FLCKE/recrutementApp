@@ -9,10 +9,13 @@ import { Button, message, Form, Input, DatePicker, InputNumber, Upload, Select, 
 
 const { TextArea } = Input;
 function Page()  {
-    const t = useTranslations('Page');
-    const dispatch = useDispatch();
+    const t = useTranslations('Page');// Hook pour la gestion des traductions.
+    const dispatch = useDispatch(); //Hook Redux pour dispatcher des actions.
+    // Fonction appelée lors de la validation du formulaire.
     const onFinish = (values) => {
         console.log('Success:', values);
+
+        // Envoi des informations personnelles au store Redux.
          dispatch(setPersonalInfo({
             FirstName: values.FirstName,
             LastName: values.LastName,
@@ -21,18 +24,22 @@ function Page()  {
             birthday: values.birthday,
         }));
 
+        // Vérification et ajout des expériences dans le store
         if (values.experience) {
             dispatch(addExperience(values.experience));
         }
 
+        // Vérification et ajout des compétences dans le store.
         if (values.skills) {
             dispatch(addSkills(values.skills));
         }
+
+        // Ajout du fichier CV dans le store.
         if (values.cvFile) {
             dispatch(setCvFile(values.cvFile));
         }
     };
-
+     // Fonction appelée en cas d'erreur de validation du formulaire.
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -40,12 +47,13 @@ function Page()  {
     return (
         <>
             <Form
-                name="dynamic_form_nest_item"
+                name="dynamic_form_candidat"
                 autoComplete="off"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                initialValues={{ remember: true }}// Valeurs initiales.
+                onFinish={onFinish}// Gestion de la soumission réussie.
+                onFinishFailed={onFinishFailed}// Gestion des erreurs de validation.
             >
+                {/* Section des informations personnelles */}
                 <div>
                     <h1>{t("personalInfoTitle")}</h1>
                     <Form.Item
@@ -93,6 +101,7 @@ function Page()  {
                         <DatePicker placeholder={t("selectDate")} />
                     </Form.Item>
                 </div>
+                {/* Section Expérience */}
                 <div>
                     <h1>{t("experienceTitle")}</h1>
                     <Form.List name="experience">
@@ -190,6 +199,7 @@ function Page()  {
                         )}
                     </Form.List>
                 </div>
+                 {/* Section Compétences */}
                 <div>
                     <h1>{t("skillsTitle")}</h1>
                     <Form.List name="skills">
@@ -235,6 +245,7 @@ function Page()  {
                         )}
                     </Form.List>
                 </div>
+                {/* Upload du fichier CV */}
                 <div>
                     <h1>{t("cvTitle")}</h1>
                     <Form.Item
@@ -252,6 +263,7 @@ function Page()  {
                     </Upload>
                  </Form.Item>
                 </div>
+                {/* Bouton de validation */}
                 <Form.Item style={{ marginTop: '20px' }} className="flex justify-center">
                     <Button type="primary" htmlType="submit" className="w-60" >
                        {t("btnValidate")}

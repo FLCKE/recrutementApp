@@ -13,13 +13,13 @@ import { useTranslations } from 'next-intl';
 
 function page() {
     const [formValuesArray, setFormValuesArray] = useState([]);
-
+    //initialiser les valeurs et les mettre a jour avec le useEffect 
     useEffect(() => {
         const values = Data;
-        
         setFormValuesArray(values);
     }, []);
-    const t = useTranslations('Page');
+    const t = useTranslations('Page');// recuperer la section de la traduction de la page 
+    // afficher un spin d'attente tant que les donnée ne sont pas recupérer
     if(formValuesArray.length==0){
         return (
             <div className="text-center ">
@@ -30,6 +30,7 @@ function page() {
    
   return (
     <section>
+        {/* affficher les candidats sous forme d'une liste  */}
         <h1 className="font-bold text-2xl my-3">{t("titlePageList")}</h1>
         <List
           itemLayout="horizontal"
