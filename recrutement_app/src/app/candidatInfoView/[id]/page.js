@@ -1,29 +1,32 @@
-import { Data } from "@/app/utilities/data";
-import { Row, Col, Card,Collapse, Image ,Descriptions} from "antd"
-import Meta from "antd/es/card/Meta";
-import {EyeOutlined, FontSizeOutlined } from '@ant-design/icons';
 
+import React from "react"
+import { Data } from "@/app/utilities/data";
+import { Row, Col, Card,Collapse, Image ,Descriptions,Tag} from "antd"
+import Meta from "antd/es/card/Meta";
+import { EyeOutlined, FontSizeOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { useTranslations } from 'next-intl';
 
 export default function Page({ params }) {
+    const t = useTranslations('Page');
     const items = [
         {
             key: '1',
-            label: 'Firstname',
+            label: t("firstname"),
             children: Data[params.id].personalInformation.firstName,
         },
         {
             key: '2',
-            label: 'Lastname',
+            label: t("lastname"),
             children: Data[params.id].personalInformation.lastName,
         },
         {
             key: '3',
-            label: 'Email',
+            label: t("email"),
             children: Data[params.id].personalInformation.email,
         },
         {
             key: '4',
-            label: 'Phone',
+            label: t("number"),
             children: Data[params.id].personalInformation.phoneNumber,
         },
         {
@@ -34,7 +37,7 @@ export default function Page({ params }) {
         },
         {
             key: '6',
-            label: 'Birthday',
+            label: t("birthday"),
             children: Data[params.id].personalInformation.birthday,
         },
     ];
@@ -42,12 +45,12 @@ export default function Page({ params }) {
         <section>
             <div >
                 <h1 className="font-bold text-2xl my-3">
-                   Personal Information 
+                  {t("personalInfoTitle")} 
                 </h1>
                 <div className="m-5">
                     <Row >
                         <Col span={18} push={5}>
-                            <Descriptions title="" bordered items={items} />
+                            <Descriptions  bordered items={items} />
 
                         </Col>
                         <Col span={6} pull={18}>
@@ -64,13 +67,13 @@ export default function Page({ params }) {
             </div>
             <div className="my-5">
                 <h1 className="font-bold text-2xl my-3">
-                    Expérience
+                    {t("experienceTitle")}
                 </h1>
                 <div className="m-5">
                     {Data[params.id].experience.map((experience, index) => (
                         <Collapse
                             collapsible="header"
-                            defaultActiveKey={['1']}
+                            defaultActiveKey={['0']}
                             items={[
                                 {
                                     key: index,
@@ -78,14 +81,14 @@ export default function Page({ params }) {
                                     children: <div>
                                         <Row>
                                             <Col span={8} offset={2}>
-                                                <h1 className="my-2"><span className="font-bold">Job Title :</span> {experience.jobTitle}</h1>
-                                                <h1 className="my-2"><span className="font-bold">Location:</span> {experience.location}</h1>
-                                                <h1 className="my-2"><span className="font-bold">Start Day :</span> {experience.startDay}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("jobTitle")}:</span> {experience.jobTitle}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("location")}:</span> {experience.location}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("startDate")} :</span> {experience.startDay}</h1>
                                             </Col>
                                             <Col span={8} offset={6}>
-                                                <h1 className="my-2"><span className="font-bold">Business or Client:</span> {experience.businessOrClient}</h1>
-                                                <h1 className="my-2"><span className="font-bold">Type of contract:</span> {experience.typeOfContract}</h1>
-                                                <h1 className="my-2"><span className="font-bold">End Day :</span> {experience.endDay}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("client")}:</span> {experience.businessOrClient}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("typeContract")}:</span> {experience.typeOfContract}</h1>
+                                                <h1 className="my-2"><span className="font-bold">{t("endDate")} :</span> {experience.endDay}</h1>
 
                                             </Col>
                                         </Row>
@@ -94,6 +97,23 @@ export default function Page({ params }) {
                             ]}
                         />
                     ))}
+                </div>
+                
+            </div>
+            <div>
+                <div className="my-5">
+                    <h1 className="font-bold text-2xl my-3">
+                        {t("skillsTitle")}
+                    </h1>
+                    <div className="m-5">
+                        {Data[params.id].skills.map((skill, index) => (
+                            <Tag bordered={false} icon={<CheckCircleOutlined />} color="processing">
+                                {skill.skillName}
+                            </Tag>
+                            
+                        ))}
+                    </div>
+
                 </div>
                 
             </div>

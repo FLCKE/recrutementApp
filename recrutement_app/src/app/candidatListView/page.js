@@ -2,6 +2,7 @@
 import {React,useEffect, useState} from 'react'
 import { Avatar, List,Spin } from 'antd';
 import { Data   } from '../utilities/data';
+import { useTranslations } from 'next-intl';
 
 
 
@@ -15,8 +16,10 @@ function page() {
 
     useEffect(() => {
         const values = Data;
+        
         setFormValuesArray(values);
     }, []);
+    const t = useTranslations('Page');
     if(formValuesArray.length==0){
         return (
             <div className="text-center ">
@@ -26,13 +29,15 @@ function page() {
     }
    
   return (
-      <List
+    <section>
+        <h1 className="font-bold text-2xl my-3">{t("titlePageList")}</h1>
+        <List
           itemLayout="horizontal"
           dataSource={formValuesArray}
           renderItem={(item,index) => (
               <List.Item>
                   <List.Item.Meta
-                      avatar={<Avatar src={item.personalInformation.cvFile} />}
+                      avatar={<Avatar shape="square" src={item.cvFile.url} />}
                       title={<a href={ "/candidatInfoView/"+index }>{item.personalInformation.firstName} {item.personalInformation.lastName}</a>}
                       description={item.personalInformation.desc}
                       
@@ -40,6 +45,7 @@ function page() {
               </List.Item>
           )}
       />
+    </section>
   )
 }
 

@@ -1,5 +1,36 @@
 {
     "HomePage": {
-        "title": "Bienvenue!"
+        "title": "Bienvenue!",
+        "personal information":"Information personnelle"
+    },
+    "Page": {
+        "titlePageList": "Liste des candidats ",
+        "personalInfoTitle":"Information personnelle",
+        "firstname":"Prénoms",
+        "lastname":"Nom",
+        "email": "email",
+        "number": "Numéro",
+        "birthday": "Date de naissance",
+        "experienceTitle": "Expérience",
+        "selectDate":"Sélectionner une date",
+        "jobTitle":"Title du poste",
+        "client":"Entreprise",
+        "location":"Adresse",
+        "typeContract": "Type de contrat",
+        "startDate":"Date de depart",
+        "endDate":"Date de fin",
+        "descPost":"Decrivez votre expérience",
+        "btnExperience":"Ajouter une expérience",
+        "skillsTitle":"Compétences",
+        "skill":"Nom de la compétence",
+        "btnSkill":"Ajouter une compétence",
+        "cvTitle":"Ajouter un cv",
+        "uploadText":"Téléverser",
+        "btnValidate":"Valider",
+        "debutant":"Débutant",
+        "intermediaire":"Intermediaire",
+        "professional":"Professionnelle"
+
+
     }
 }

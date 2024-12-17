@@ -1,13 +1,36 @@
 "use client";
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
+import { useDispatch } from 'react-redux';
+import { setPersonalInfo, addExperience, addSkills,setCvFile } from '../../lib/slices/dataSlice';
 import { MinusCircleOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, message, Form, Input, DatePicker, InputNumber, Upload, Select, Space } from 'antd';
 
 const { TextArea } = Input;
 function Page()  {
+    const t = useTranslations('Page');
+    const dispatch = useDispatch();
     const onFinish = (values) => {
         console.log('Success:', values);
+         dispatch(setPersonalInfo({
+            FirstName: values.FirstName,
+            LastName: values.LastName,
+            email: values.email,
+            phoneNumber: values.phoneNumber,
+            birthday: values.birthday,
+        }));
+
+        if (values.experience) {
+            dispatch(addExperience(values.experience));
+        }
+
+        if (values.skills) {
+            dispatch(addSkills(values.skills));
+        }
+        if (values.cvFile) {
+            dispatch(setCvFile(values.cvFile));
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -24,23 +47,23 @@ function Page()  {
                 onFinishFailed={onFinishFailed}
             >
                 <div>
-                    <h1>Personal information</h1>
+                    <h1>{t("personalInfoTitle")}</h1>
                     <Form.Item
-                        label="FirstName"
+                        label={t("firstname")}
                         name="FirstName"
                         rules={[{ required: true, message: 'Please input your Firstname!' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        label="LastName"
+                        label={t("lastname")}
                         name="LastName"
                         rules={[{ required: true, message: 'Please input your Lastname!' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        label="Email"
+                        label={t("email")}
                         name="email"
                         rules={[
                             { type: 'email', message: 'The input is not valid E-mail!' },
@@ -50,7 +73,7 @@ function Page()  {
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        label="InputNumber"
+                        label={t("number")}
                         name="phoneNumber"
                         rules={[
                             { type: 'number', message: 'The input is not valid number!' },
@@ -60,19 +83,19 @@ function Page()  {
                         <InputNumber />
                     </Form.Item>
                     <Form.Item
-                        label="Birthday"
+                        label={t("birthday")}
                         name="birthday"
                         rules={[
                             { type: 'date', message: 'The input is not valid birthday!' },
                             { required: true, message: 'Please input your birthday!' },
                         ]}
                     >
-                        <DatePicker />
+                        <DatePicker placeholder={t("selectDate")} />
                     </Form.Item>
                 </div>
                 <div>
-                    <h1>Experience</h1>
-                    <Form.List name="users">
+                    <h1>{t("experienceTitle")}</h1>
+                    <Form.List name="experience">
                         {(fields, { add, remove }) => (
                             <>
                                 {fields.map(({ key, name, ...restField }) => (
@@ -85,7 +108,7 @@ function Page()  {
                                                     { required: true, message: 'Missing Job title' },
                                                 ]}
                                             >
-                                                <Input placeholder="Job title" />
+                                                <Input placeholder={t("jobTitle")} />
                                             </Form.Item>
                                             <Form.Item
                                                 {...restField}
@@ -94,7 +117,7 @@ function Page()  {
                                                     { required: true, message: 'Missing Business or Client' },
                                                 ]}
                                             >
-                                                <Input placeholder="Business or Client" />
+                                                <Input placeholder={t("client")} />
                                             </Form.Item>
                                             <Form.Item
                                                 {...restField}
@@ -103,7 +126,7 @@ function Page()  {
                                                     { required: true, message: 'Missing location' },
                                                 ]}
                                             >
-                                                <Input placeholder="Location" />
+                                                <Input placeholder={t("location")} />
                                             </Form.Item>
                                             <MinusCircleOutlined onClick={() => remove(name)} />
                                         </Space>
@@ -117,43 +140,39 @@ function Page()  {
                                             }, { required: true, message: 'Missing Type of contract' }]}
                                         >
                                             <Select
-                                                defaultValue="Stage"
+
                                                 style={{width:120 }}
                                                 allowClear
                                                 options={[{ value: 'Stage', label: 'Stage' }, { value: 'Alternance', label: 'Alternance' }, { value: 'CDI', label: 'CDI' }, { value: 'CDD', label: 'CDD' }]}
-                                                placeholder="Type of contract"
+                                                    placeholder={t("typeContract")}
                                             />
                                         </Form.Item>
                                         <Form.Item
-                                        
-                                        name="startDay"
-                                        rules={[{
-                                            type: 'date',
-                                                message: 'The input is not valid startDay!',
-                                            }, { required: true, message: 'Please input your startDay!' }]}>
-                                            <DatePicker placeholder='Start date' />
+                                                 {...restField}
+                                                name={[name,"startDay"]}
+                                                rules={[{ required: true, message: 'Please input your startDay!' }]}>
+                                                        <DatePicker placeholder={t("startDate")} />
                                         </Form.Item>
                                         <Form.Item
-                                            name="endDay"
-                                            rules={[{
-                                                type: 'date',
-                                                message: 'The input is not valid endDay!',
-                                            }, { required: true, message: 'Please input your endDay!' }]}>
-                                            <DatePicker placeholder=' End date ' />
+                                            {...restField}
+                                            name={[name,"endDay"]}
+                                            dependencies={['startDay']}
+                                            rules={[ { required: true, message: 'Please input your endDay!' }]}>
+                                                <DatePicker placeholder={t("endDate")} />
                                         </Form.Item>
                                         
                                         </Space>
                                         <Space key={key} style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }} align="baseline">
                                             <Form.Item
                                                 {...restField}
-                                                name={[name, 'typeOfContract']}
+                                                name={[name, 'descPost']}
                                                 
                                             >
                                                 <TextArea
                                                     showCount
                                                     maxLength={100}
                                                     
-                                                    placeholder="disable resize"
+                                                    placeholder={t("descPost")}
                                                     style={{ height: 120 , width: "40rem" }}
                                                 />
                                             </Form.Item>
@@ -164,7 +183,7 @@ function Page()  {
                                 ))}
                                 <Form.Item>
                                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                        Add experience
+                                        {t("btnExperience")}
                                     </Button>
                                 </Form.Item>
                             </>
@@ -172,7 +191,7 @@ function Page()  {
                     </Form.List>
                 </div>
                 <div>
-                    <h1>Skills</h1>
+                    <h1>{t("skillsTitle")}</h1>
                     <Form.List name="skills">
                         {(fields, { add, remove }) => (
                             <>
@@ -185,7 +204,7 @@ function Page()  {
                                                 { required: true, message: 'Missing skills name' },
                                             ]}
                                         >
-                                            <Input placeholder="Skill Name" />
+                                            <Input placeholder={t("skill")} />
                                         </Form.Item>
                                         <Form.Item
                                             {...restField}
@@ -195,12 +214,12 @@ function Page()  {
                                             ]}
                                         >
                                             <Select
-                                                defaultValue="Débutant"
+                                                placeholder={t("debutant")}
                                                 style={{ width: 120 }}
                                                 options={[
-                                                    { value: 'Débutant', label: 'Débutant' },
-                                                    { value: 'Intermédiaire', label: 'Intermédiaire' },
-                                                    { value: 'Pro', label: 'Pro' },
+                                                    { value: 'Débutant', label: t("debutant") },
+                                                    { value: 'Intermédiaire', label: t("intermediaire") },
+                                                    { value: 'Pro', label: t("professional")},
                                                 ]}
                                             />
                                         </Form.Item>
@@ -209,7 +228,7 @@ function Page()  {
                                 ))}
                                 <Form.Item>
                                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                        Add skill
+                                       {t("btnSkill")}
                                     </Button>
                                 </Form.Item>
                             </>
@@ -217,22 +236,29 @@ function Page()  {
                     </Form.List>
                 </div>
                 <div>
-                    <h1>Add your CV</h1>
+                    <h1>{t("cvTitle")}</h1>
+                    <Form.Item
+                         name='cvFile'
+                    >
+
                     <Upload
+                       
                         action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
                         listType="picture"
-                    >
+                        >
                         <Button type="primary" icon={<UploadOutlined />}>
-                            Upload
+                            {t("uploadText")}
                         </Button>
                     </Upload>
+                 </Form.Item>
                 </div>
-                <Form.Item style={{ marginTop: '20px' }}>
-                    <Button type="primary" htmlType="submit">
-                        Validate
+                <Form.Item style={{ marginTop: '20px' }} className="flex justify-center">
+                    <Button type="primary" htmlType="submit" className="w-60" >
+                       {t("btnValidate")}
                     </Button>
                 </Form.Item>
             </Form>
+            <h1></h1>
         </>
     );
 };

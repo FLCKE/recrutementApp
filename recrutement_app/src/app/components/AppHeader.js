@@ -40,15 +40,15 @@ function AppHeader() {
             <div>
                 
                 <Dropdown
-                   
+                    className="border-1"
                     menu={{
                         items,
                     }}
                     
                 >
-                    <a onClick={(e) => e.preventDefault()}>
+                    <a onClick={(e) => e.preventDefault()} className="text-white">
                         <Space>
-                            Hover me
+                            Language
                             <DownOutlined />
                         </Space>
                     </a>

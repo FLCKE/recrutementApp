@@ -1,5 +1,33 @@
 {
     "HomePage": {
         "title": "Hello world!"
+    },
+    "Page": {
+        "titlePageList": "List of candidats ",
+        "personalInfoTitle": "Personal Information",
+        "firstname": "First Name",
+        "lastname": "Last Name",
+        "email": "Email",
+        "number": "Phone Number",
+        "birthday": "Date of Birth",
+        "experienceTitle": "Experience",
+        "selectDate": "Select a Date",
+        "jobTitle": "Job Title",
+        "client": "Company",
+        "location": "Address",
+        "typeContract": "Type of contract",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "descPost": "Describe your experience",
+        "btnExperience": "Add an Experience",
+        "skillsTitle": "Skills",
+        "skill": "Skill Name",
+        "btnSkill": "Add a Skill",
+        "cvTitle": "Add a CV",
+        "uploadText":"Upload",
+        "btnValidate": "Validate",
+        "debutant":"Beginner",
+        "intermediaire":"Intermediate",
+        "professional":"Professional"
     }
 }
